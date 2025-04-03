@@ -6,9 +6,33 @@ import 'package:get/get.dart';
 import 'package:bus_online/env_key.dart';
 import 'dart:convert';
 
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 class AuthService {
+  final supabase = Supabase.instance.client.auth;
   final UserStorage _storage = UserStorage();
   final FetchBase fetch = FetchBase();
+
+  Future<bool> loginWithSupabase(String email, String password) async {
+    try {
+      final re = await supabase.signInWithPassword(
+        email: email,
+        password: password,
+      );
+      if (re.user != null) {
+        Get.snackbar('Login success', "Đăng nhập thành công");
+        return true;
+      } else {
+        Get.snackbar('Login fail', "Không tìm thấy User");
+        return false;
+      }
+    } catch (e) {
+      if (e is AuthException) {
+        Get.snackbar('Login fail', e.message);
+      }
+      return false;
+    }
+  }
 
   Future loginWithEmail(String email, String password, String role) async {
     try {
@@ -92,8 +116,10 @@ class AuthService {
   }
 
   bool isLogin() {
-    final String token = _storage.getToken();
-    return token != "";
+    // final String token = _storage.getToken();
+    // return token != "";
+    final currentUser = Supabase.instance.client.auth.currentUser;
+    return currentUser != null;
   }
 
   bool isDriver() {
