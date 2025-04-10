@@ -64,7 +64,7 @@ class PersonalPage extends StatelessWidget {
               children: [
                 TextButton.icon(
                     onPressed: () {
-										auth.logout();
+										auth.logoutWithSupabase();
 								},
                     icon: const Icon(Icons.exit_to_app),
                     label: const Text('Đăng xuất')),

@@ -27,8 +27,7 @@ CREATE TABLE chi_tiet_tuyen (
 -- Tạo bảng profile để lưu thông tin người dùng  
 create table public.profiles (
   id uuid not null references auth.users on delete cascade,
-  first_name text,
-  last_name text,
+  name text,
   role text,
   primary key (id)
 );
@@ -71,8 +70,8 @@ language plpgsql
 security definer set search_path = ''
 as $$
 begin
-  insert into public.profiles (id, first_name, last_name, role)
-  values (new.id, new.raw_user_meta_data ->> 'first_name', new.raw_user_meta_data ->> 'last_name',  new.raw_user_meta_data ->> 'role');
+  insert into public.profiles (id, name, role)
+  values (new.id, new.raw_user_meta_data ->> 'name',  new.raw_user_meta_data ->> 'role');
   return new;
 end;
 $$;

@@ -15,11 +15,11 @@ class AuthService {
 
   Future<bool> loginWithSupabase(String email, String password) async {
     try {
-      final re = await supabase.signInWithPassword(
+      final AuthResponse res = await supabase.signInWithPassword(
         email: email,
         password: password,
       );
-      if (re.user != null) {
+      if (res.user != null) {
         Get.snackbar('Login success', "Đăng nhập thành công");
         return true;
       } else {
@@ -29,6 +29,31 @@ class AuthService {
     } catch (e) {
       if (e is AuthException) {
         Get.snackbar('Login fail', e.message);
+      }
+      return false;
+    }
+  }
+
+  Future<bool> signupWithSupabase(String name, String email, String password) async {
+    try {
+      final AuthResponse res = await supabase.signUp(
+        email: email,
+        password: password,
+        data: {
+          "name": name,
+          "role": "customer",
+        },
+      );
+      if (res.user != null) {
+        Get.snackbar('Sign up success', "Đăng kí thành công");
+        return true;
+      } else {
+        Get.snackbar('Sign up fail', "Không tìm thấy User");
+        return false;
+      }
+    } catch (e) {
+      if (e is AuthException) {
+        Get.snackbar('Sign up fail', e.message);
       }
       return false;
     }
@@ -92,6 +117,14 @@ class AuthService {
     }
   }
 
+  Future logoutWithSupabase() async {
+    try {
+        await supabase.signOut();
+        Get.offAll(const LoginPage());
+    } catch (e) {
+      Get.snackbar('Lỗi', 'Hệ thống đang gặp lỗi');
+    }
+  }
   Future logout() async {
     try {
       http.Response response = await fetch.post(
@@ -125,5 +158,9 @@ class AuthService {
   bool isDriver() {
     final String role = _storage.getRole();
     return role == 'driver';
+  }
+
+  User? getUser()  {
+    return supabase.currentUser;
   }
 }

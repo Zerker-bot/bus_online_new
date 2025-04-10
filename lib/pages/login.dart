@@ -1,5 +1,4 @@
 import 'package:bus_online/controllers/login_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -101,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                                           AutovalidateMode.onUserInteraction,
                                       keyboardType: TextInputType.emailAddress,
                                       controller: controller.emailController,
-                                    textAlignVertical: TextAlignVertical(y: -0.25),
+                                    textAlignVertical: TextAlignVertical(y: 0),
                                       validator: (value) {
                                         // return controller
                                         // 		.emailValidator(value!);
@@ -141,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                                       autovalidateMode:
                                           AutovalidateMode.onUserInteraction,
                                       controller: controller.passwordController,
-                                      textAlignVertical: TextAlignVertical(y: -0.25),
+                                      textAlignVertical: TextAlignVertical(y: 0),
                                       validator: (value) {
                                         // return controller
                                         // 		.passwordValidator(value!);
