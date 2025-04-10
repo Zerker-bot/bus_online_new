@@ -9,11 +9,11 @@ class ChuyenXe {
 
  factory ChuyenXe.fromJson(Map<String, dynamic> json) {
    return ChuyenXe(
-		maChuyen: json['maChuyen'] as String,
-		maTuyen: json['chuyen']?['maTuyen'] ?? "",
-		maXe: json['maXe'] as String,
-		gioLuotDi: json['gioLuotDi'] as String,
-		gioLuotVe: json['gioLuotVe'] as String
+		maChuyen: json['ma_chuyen'] as String,
+		maTuyen: json['chuyen']?['ma_tuyen'] ?? "",
+		maXe: json['ma_xe'] as String,
+		gioLuotDi: json['luot_di'] as String,
+		gioLuotVe: json['luot_ve'] as String
 	);
 	}
   

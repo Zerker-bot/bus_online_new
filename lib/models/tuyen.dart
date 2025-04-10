@@ -6,8 +6,8 @@ class Tuyen {
 
   factory Tuyen.fromJson(Map<String, dynamic> json) {
     return Tuyen(
-			maTuyen: json['maTuyen'] as String, 
-			tenTuyen: json['tenTuyen'] as String)
+			maTuyen: json['ma_tuyen'] as String, 
+			tenTuyen: json['ten_tuyen'] as String)
     ;
   }
 }

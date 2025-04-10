@@ -8,9 +8,9 @@ class Tram {
 
   factory Tram.fromJson(Map<String, dynamic> json) {
     return Tram(
-      maTram: json['maTram'] as String,
-      tenTram: json['tram']['tenTram'] as String,
-      thuTuTram: json['thuTuTram'] ?? "",
+      maTram: json['ma_tram'] as String,
+      tenTram: json['tram']['ten_tram'] as String,
+      thuTuTram: json['thu_tu_tram'] ?? "",
 			soNguoiDen: 0,
     );
   }

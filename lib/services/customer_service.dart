@@ -1,24 +1,29 @@
 import 'dart:convert';
 import 'package:bus_online/fetch/fetch_base.dart';
 import 'package:bus_online/models/don_tra.dart';
+import 'package:bus_online/services/auth_service.dart';
 import 'package:bus_online/utils/parse_query_string.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:bus_online/env_key.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class CustomerService {
+  final supabase = Supabase.instance.client;
+  final authService = AuthService();
   final FetchBase fetch = FetchBase();
 
   Future<List<DonTra>?> getDonTra() async {
     try {
-      http.Response res = await fetch.get(
-          endPoint: ApiEndPoints.customerEndPoints.bangDonTra, auth: true);
+      final user = authService.getUser();
+      if(user == null) {
+        Get.snackbar('Lỗi', "Không tìm thấy user");
+        return null;
+      }
+      PostgrestList res = await supabase.from("bang_don_tra").select().eq("ma_khach_hang", user.id);
 
-      if (res.statusCode != 200) return null;
-
-      final List list = jsonDecode(res.body)['bangDonTra'];
       final List<DonTra> listOfDonTra =
-          list.map((e) => DonTra.fromJson(e)).toList();
+          res.map((e) => DonTra.fromJson(e)).toList();
       return listOfDonTra;
     } catch (e) {
       Get.snackbar('Lỗi', e.toString());
