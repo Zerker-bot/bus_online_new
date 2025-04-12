@@ -113,39 +113,117 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return Scaffold(
+      body: Stack(
         children: [
-          const Text(
-            'Xin chào bạn!',
-            style: TextStyle(color: Color(0xFF626262), fontSize: 18),
-          ),
-          Text(
-            '$userName',
-            style: const TextStyle(
-              color: Color(0xFFF9A000),
-              fontSize: 27,
-              fontWeight: FontWeight.w700,
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
             ),
           ),
-          const SizedBox(height: 20),
-          SizedBox(
-            height: 260,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              child: Image.network(
-                'https://cdn1.img.sputniknews.vn/img/07e6/02/03/13560397_84:0:1417:1000_1920x0_80_0_0_c74c0dc5e7acbe1783ca22be16fbbbef.jpg',
-                fit: BoxFit.fitHeight,
-                loadingBuilder: (context, child, progress) {
-                  if (progress == null) {
-                    return child;
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                },
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.3,
+            left: 0,
+            right: 0,
+            child: Container(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.7,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(60),
+                  topRight: Radius.circular(60),
+                ),
               ),
+            ),
+          ),
+          Positioned(
+            top: 220,
+            left: MediaQuery.of(context).size.width * 0.075,
+            right: MediaQuery.of(context).size.width * 0.075,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.1,
+              width: MediaQuery.of(context).size.width * 0.85,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 6,
+                    offset: Offset(0, 4),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: 10,
+            left: MediaQuery.of(context).size.width * 0.075,
+            right: MediaQuery.of(context).size.width * 0.075,
+            child: Text(
+              'Xin chào,'+'\n$userName',
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  ),
+            ),
+          ),
+          Positioned(
+            top: 135,
+            left: MediaQuery.of(context).size.width * 0.075,
+            right: MediaQuery.of(context).size.width * 0.075,
+            child: Text(
+              'Bạn muốn đi đâu?',
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white,
+                  ),
+            ),
+          ),
+          Positioned(
+            top: 160,
+            left: MediaQuery.of(context).size.width * 0.075,
+            right: MediaQuery.of(context).size.width * 0.075,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              height: MediaQuery.of(context).size.height * 0.05,
+              width: MediaQuery.of(context).size.width * 0.85,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.search, color: Colors.grey),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Tìm kiếm địa điểm...',
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          Positioned(
+            top: 350,
+            left: MediaQuery.of(context).size.width * 0.075,
+            right: MediaQuery.of(context).size.width * 0.075,
+            child: Text(
+              'Dịch vụ',
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontFamily: "Times New Roman"),
             ),
           ),
         ],
