@@ -59,7 +59,7 @@ class DonTra {
 		createdAt : json['created_at'] as String,
 		updatedAt: json['updated_at'] as String,
 		chuyenXe: chuyenXe,
-		tenHanhKhach: "",
+		tenHanhKhach: json['ten_khach_hang'] as String,
 		chieu: json['chieu'] as String,
 	);
 	}
