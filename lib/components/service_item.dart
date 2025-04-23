@@ -19,8 +19,8 @@ class ServiceItem extends StatelessWidget {
     return GestureDetector(
       onTap: () => {Get.toNamed(routePath)},
       child: Container(
-        width: 160,
-        height: 140,
+        width: 120,
+        height: 100,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             color: primary ? Theme.of(context).primaryColor : Colors.white,
@@ -57,7 +57,7 @@ class ServiceItem extends StatelessWidget {
             style: TextStyle(
               color: primary ? Colors.white : Colors.black,
               fontWeight: primary ? FontWeight.w600 : FontWeight.w500,
-              fontSize: 16,
+              fontSize: 8,
             ),
           )
         ]),

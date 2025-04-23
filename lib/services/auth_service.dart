@@ -163,4 +163,20 @@ class AuthService {
   User? getUser()  {
     return supabase.currentUser;
   }
+
+  String getName() {
+    final user = getUser();
+    if ( user == null ) return "";
+    final metadata = user.userMetadata;
+    if ( metadata == null ) return "";
+    return metadata["name"];
+  }
+
+  String getRole() {
+    final user = getUser();
+    if ( user == null ) return "";
+    final metadata = user.userMetadata;
+    if ( metadata == null ) return "";
+    return metadata["role"];
+  }
 }
