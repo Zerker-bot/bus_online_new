@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:bus_online/fetch/fetch_base.dart';
 import 'package:bus_online/models/don_tra.dart';
+import 'package:bus_online/models/tram.dart';
 import 'package:bus_online/services/auth_service.dart';
-import 'package:bus_online/utils/parse_query_string.dart';
+import 'package:bus_online/services/tuyen_service.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:bus_online/env_key.dart';
@@ -11,19 +12,24 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class CustomerService {
   final supabase = Supabase.instance.client;
   final authService = AuthService();
+  final tuyenService = TuyenService();
   final FetchBase fetch = FetchBase();
 
   Future<List<DonTra>?> getDonTra() async {
     try {
-      final user = authService.getUser();
-      if(user == null) {
-        Get.snackbar('Lỗi', "Không tìm thấy user");
-        return null;
-      }
-      PostgrestList res = await supabase.from("bang_don_tra").select().eq("ma_khach_hang", user.id);
+      final user = authService.getUserId();
+      // if(user == null) {
+      //   Get.snackbar('Lỗi', "Không tìm thấy user");
+      //   return null;
+      // }
+      PostgrestList res = await supabase.from("bang_don_tra").select('''
+        *,
+        tram_di:ma_tram_di (*),
+        tram_den:ma_tram_dich (*),
+        chuyen_xe(*)
+        ''').eq("ma_khach_hang", user);
 
-      final List<DonTra> listOfDonTra =
-          res.map((e) => DonTra.fromJson(e)).toList();
+      final List<DonTra> listOfDonTra = res.map((e) => DonTra.fromJson(e)).toList();
       return listOfDonTra;
     } catch (e) {
       Get.snackbar('Lỗi', e.toString());
@@ -37,58 +43,70 @@ class CustomerService {
     required String maTuyen,
     required String maChuyen,
     required int soLuong,
+    required int tienPhi,
     required String chieu,
   }) async {
     try {
-      final body = {
-        "maTramDi": maTramDi,
-        "maTramDen": maTramDen,
-        "maTuyen": maTuyen,
-        "maChuyen": maChuyen,
-        "soLuong": soLuong,
+      await supabase.from("bang_don_tra").insert({
+        "ten_khach_hang": authService.getName(),
+        "ma_khach_hang": authService.getUserId(),
+        "ma_tram_di": maTramDi,
+        "ma_tram_dich": maTramDen,
+        "ma_chuyen": maChuyen,
+        "hoan_thanh": false,
+        "trang_thai_thanh_toan": null,
+        "tien_phi": tienPhi,
+        "so_luong": soLuong,
         "chieu": chieu
-      };
-      http.Response res = await fetch.post(
-          endPoint: ApiEndPoints.customerEndPoints.bangDonTra,
-          body: body,
-          auth: true);
-
-      if (res.statusCode != 200) return false;
-      final json = jsonDecode(res.body);
-      if (json['status']) {
-        Get.snackbar('Thành công', json['message']);
-      }
-      return json['status'];
+      });
+      return true;
     } catch (e) {
       Get.snackbar('Lỗi', e.toString());
       return false;
     }
   }
 
-  Future<String?> tinhTien(
+  Future<int> tinhTien(
       {required String? maTramDi,
       required String? maTramDen,
       required String? maTuyen,
       required int soLuong}) async {
     try {
-      Map<String, String?> queryParams = {
-        "maTramDen": maTramDen,
-        "maTramDi": maTramDi,
-        "maTuyen": maTuyen,
-        "soLuong": soLuong.toString(),
-      };
-      final String queryString = parseQueryString(queryParams);
-      http.Response res = await fetch.get(
-          endPoint:
-              '${ApiEndPoints.customerEndPoints.bangDonTra}/tinh-tien$queryString',
-          auth: true);
 
-      if (res.statusCode != 200) return null;
-      final json = jsonDecode(res.body);
-      return json['tienPhi'].toString();
+      if(maTuyen == null)
+      {
+        return 0;
+      }
+      List<Tram>? listOfTram = await tuyenService.getTramFromTuyen(maTuyen);
+      if(listOfTram == null)
+      {
+        return 0;
+      }
+      
+      var total = 0;
+      var thuTuTramDi = int.parse(listOfTram.singleWhere((e) { return e.maTram == maTramDi; }).thuTuTram);
+      var thuTuTramDen = int.parse(listOfTram.singleWhere((e) { return e.maTram == maTramDen; }).thuTuTram);
+
+      if(thuTuTramDi > thuTuTramDen)
+      {
+        var temp = thuTuTramDen;
+        thuTuTramDen = thuTuTramDi;
+        thuTuTramDi = temp;
+      }
+
+      for(var tram in listOfTram)
+      {
+        if(int.parse(tram.thuTuTram) >= thuTuTramDi && int.parse(tram.thuTuTram) < thuTuTramDen)
+        {
+           total += tram.tienPhi;
+        }
+      }
+      
+      total = total*soLuong;
+      return total;
     } catch (e) {
       Get.snackbar('Lỗi', e.toString());
-      return null;
+      return 0;
     }
   }
 

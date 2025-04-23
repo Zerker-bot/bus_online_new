@@ -164,6 +164,10 @@ class AuthService {
     return supabase.currentUser;
   }
 
+  String getUserId()  {
+    return supabase.currentUser?.id ?? "";
+  }
+
   String getName() {
     final user = getUser();
     if ( user == null ) return "";

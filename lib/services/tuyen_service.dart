@@ -28,10 +28,15 @@ class TuyenService {
   Future<List<Tram>?> getTramFromTuyen(String? maTuyen) async {
     try {
       if (maTuyen == null) return null;
-      PostgrestList res = await supabase.from("tuyen").select("*, chi_tiet_tuyen(*, tram(*))").eq("ma_tuyen", maTuyen);
+      // PostgrestList res = await supabase.from("tuyen").select("*, chi_tiet_tuyen(*, tram(*))").eq("ma_tuyen", maTuyen);
 
-      final List list = res[0]['chi_tiet_tuyen'];
-      final List<Tram> listOfTram = list.map((e) => Tram.fromJson(e)).toList();
+      PostgrestList res = await supabase.from("chi_tiet_tuyen")
+      .select("*, tram(*)")
+      .eq("ma_tuyen", maTuyen)
+      .order("thu_tu_tram", ascending: true);
+
+      // final List list = res[0]['chi_tiet_tuyen'];
+      final List<Tram> listOfTram = res.map((e) => Tram.fromJson(e)).toList();
       return listOfTram;
     } catch (e) {
       Get.snackbar('Lỗi', e.toString());
