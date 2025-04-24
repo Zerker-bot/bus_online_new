@@ -49,8 +49,8 @@ class DonTra {
 		maChuyen: json['ma_chuyen'] as String,
 		maKhachHang: json['ma_khach_hang'].toString(),
 		maTramDi: json['ma_tram_di'] as String,
-		tenTramDi: json['tram_di']['ten_ram'] as String,
-		maTramDen: json['ma_tram_den'] as String,
+		tenTramDi: json['tram_di']['ten_tram'] as String,
+		maTramDen: json['ma_tram_dich'] as String,
 		tenTramDen: json['tram_den']['ten_tram'] as String,
 		hoanThanh: json['hoan_thanh'],
 		trangThaiThanhToan: json['trang_thai_thanh_toan'],
@@ -59,7 +59,7 @@ class DonTra {
 		createdAt : json['created_at'] as String,
 		updatedAt: json['updated_at'] as String,
 		chuyenXe: chuyenXe,
-		tenHanhKhach: "",
+		tenHanhKhach: json['ten_khach_hang'] as String,
 		chieu: json['chieu'] as String,
 	);
 	}

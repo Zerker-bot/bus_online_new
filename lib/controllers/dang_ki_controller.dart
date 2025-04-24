@@ -60,24 +60,23 @@ class DangKiVeController extends GetxController {
   }
 
   void decreaseNumberOfTicket() {
-    if (numberOfTicket.value == 0) return;
-    numberOfTicket.value--;
+    if (numberOfTicket.value != 0) {
+     numberOfTicket.value--;
+    }
     _setTienPhi();
   }
 
   void _setTienPhi() async {
     if (tramDiSelected.value != null &&
         tramDenSelected.value != null &&
-        tuyenSelected.value != null &&
-        numberOfTicket.value != 0) {
-      String? tienPhi = await customerService.tinhTien(
+        tuyenSelected.value != null) {
+      int tienPhi = await customerService.tinhTien(
           maTramDi: tramDiSelected.value?.maTram,
           maTramDen: tramDenSelected.value?.maTram,
           maTuyen: tuyenSelected.value?.maTuyen,
           soLuong: numberOfTicket.value);
-      if (tienPhi != null) {
-        fee.value = tienPhi;
-      }
+
+        fee.value = tienPhi.toString();
     }
   }
 
@@ -172,7 +171,8 @@ class DangKiVeController extends GetxController {
 			maTuyen: tuyenSelected.value!.maTuyen, 
 			maChuyen: chuyenXeSelected.value!.maChuyen, 
 			soLuong: numberOfTicket.value,
-			chieu: chieuDiCuaHanhKhach.value
+			chieu: chieuDiCuaHanhKhach.value,
+      tienPhi: int.parse(fee.value)
 		);
 		if(status) { 
 				resetAllValue();
