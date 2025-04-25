@@ -5,13 +5,10 @@ class UserStorage {
   final GetStorage _storage = GetStorage();
 
   void setUser(
-      {required String token, required String name, required String role, String? maChuyen }) {
+      {required String name, required String role}) {
     try {
-      _storage.write('userToken', token);
       _storage.write('userName', name);
       _storage.write('userRole', role);
-			if(maChuyen == null) return;
-			_storage.write('maChuyen', maChuyen);
     } catch (e) {
       Get.snackbar('Error', e.toString());
     }
@@ -20,12 +17,8 @@ class UserStorage {
   Map<String, String>? getUser() {
     try {
       var user = <String, String>{};
-      user['userToken'] = _storage.read('userToken');
       user['userName'] = _storage.read('userName');
       user['userRole'] = _storage.read('userRole');
-			if(user['userRole'] != "driver") return user;
-			user['maChuyen'] = _storage.read('maChuyen');
-      return user;
     } catch (e) {
       Get.snackbar('Error', e.toString());
       return null;
@@ -41,23 +34,16 @@ class UserStorage {
 		return role ?? "";
 	}
 
-	String getToken() {
-		var token = _storage.read('userToken');
-		return token ?? "";
-	}
+  String getMaChuyen() {
+    return "";
+  }
 
-	String getMaChuyen() {
-		var maChuyen = _storage.read('maChuyen');
-		return maChuyen ?? "";
-	}
 
 
   void removeUser() {
     try {
       _storage.remove('userName');
       _storage.remove('userToken');
-      _storage.remove('userRole');
-      _storage.remove('maChuyen');
     } catch (e) {
       Get.snackbar('Error', e.toString());
     }

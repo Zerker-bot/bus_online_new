@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
 				GetPage(name: '/chon-chuyen-xe', page: () => ChonChuyenXe()),
 				GetPage(name: '/xac-nhan', page: () => XacNhan()),
 				GetPage(name: '/scanner', page: () => const BarcodeScannerWithController()),
-				GetPage(name: '/dashboard', page: () => const Dashboard()),
+				GetPage(name: '/dashboard', page: () => Dashboard()),
 			],
     );
   }

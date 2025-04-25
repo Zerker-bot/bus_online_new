@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:bus_online/env_key.dart';
-import 'package:bus_online/fetch/fetch_base.dart';
 import 'package:bus_online/models/chuyen_xe.dart';
 import 'package:bus_online/models/tram.dart';
 import 'package:bus_online/models/tuyen.dart';
@@ -9,7 +8,6 @@ import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class TuyenService {
-  final FetchBase fetch = FetchBase();
   final supabase = Supabase.instance.client;
 
 
@@ -45,20 +43,20 @@ class TuyenService {
   }
 
   Future<ChuyenXe?> getChuyenXe(String maChuyen) async {
-    try {
-      http.Response res = await fetch.get(
-        endPoint: '${ApiEndPoints.chuyenXeEndPoints.chuyenXe}/$maChuyen',
-        auth: true,
-      );
-      if (res.statusCode != 200) return null;
-
-      final data = jsonDecode(res.body)['data'];
-      final ChuyenXe chuyenXe = ChuyenXe.fromJson(data);
-      return chuyenXe;
-    } catch (e) {
-      Get.snackbar('Lỗi', e.toString());
-      return null;
-    }
+    // try {
+    //   http.Response res = await fetch.get(
+    //     endPoint: '${ApiEndPoints.chuyenXeEndPoints.chuyenXe}/$maChuyen',
+    //     auth: true,
+    //   );
+    //   if (res.statusCode != 200) return null;
+    //
+    //   final data = jsonDecode(res.body)['data'];
+    //   final ChuyenXe chuyenXe = ChuyenXe.fromJson(data);
+    //   return chuyenXe;
+    // } catch (e) {
+    //   Get.snackbar('Lỗi', e.toString());
+    //   return null;
+    // }
   }
 
   Future<List<ChuyenXe>?> getTatCaChuyenXe(String? maTuyen) async {
