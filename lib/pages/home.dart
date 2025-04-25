@@ -13,7 +13,6 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-
 class _HomeScreenState extends State<HomeScreen> {
   int bottomSelectedIndex = 0;
 
@@ -245,7 +244,7 @@ class HomePage extends StatelessWidget {
                             children: [
                               ServiceItem(
                                 logoPath: 'assets/images/leather-jacket-1.png',
-                                title: 'Dashboard',
+                                title: 'Quét mã QR',
                                 routePath: '/dashboard',
                                 primary: true,
                               ),

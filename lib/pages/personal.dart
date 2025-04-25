@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 class PersonalPage extends StatelessWidget {
   PersonalPage({super.key});
 
-  final AuthService auth = AuthService();
-
-  final UserStorage user = UserStorage();
+  final AuthService user = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +23,22 @@ class PersonalPage extends StatelessWidget {
                 )),
           ),
         ),
-        Positioned(
-            top: 60,
-            left: 100,
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(100)),
-                  border: Border.all(width: 3, color: Colors.grey[500]!)),
-              child: const CircleAvatar(
-                radius: 80,
-                backgroundImage: NetworkImage(
-                    'https://img.freepik.com/free-photo/handsome-bearded-guy-posing-against-white-wall_273609-20597.jpg'),
-              ),
-            )),
+        Positioned.fill(
+            top: 30,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(100)),
+                    border: Border.all(width: 3, color: Colors.grey[500]!)),
+                child: const CircleAvatar(
+                  radius: 80,
+                  backgroundImage: NetworkImage(
+                      'https://img.freepik.com/free-photo/handsome-bearded-guy-posing-against-white-wall_273609-20597.jpg'),
+                ),
+              )],
+    )),
         Positioned.fill(
           top: 230,
           child: Column(
@@ -51,7 +52,7 @@ class PersonalPage extends StatelessWidget {
                 ),
               ),
               Text(
-                user.getRole() == 'driver' ? 'Tài xế' : 'Khách',
+                user.getRole(),
                 style: TextStyle(fontSize: 16, color: Colors.grey[700]!),
               ),
             ],
@@ -64,7 +65,7 @@ class PersonalPage extends StatelessWidget {
               children: [
                 TextButton.icon(
                     onPressed: () {
-										auth.logoutWithSupabase();
+										user.logoutWithSupabase();
 								},
                     icon: const Icon(Icons.exit_to_app),
                     label: const Text('Đăng xuất')),

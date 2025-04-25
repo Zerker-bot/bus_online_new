@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
+import '../../controllers/dashboard_controller.dart';
+
 class BarcodeScannerWithController extends StatefulWidget {
   const BarcodeScannerWithController({super.key});
 
@@ -22,8 +24,7 @@ class BarcodeScannerWithControllerState
     // facing: CameraFacing.front,
   );
 
-	DanhSachVeController danhSachVeController = Get.put(DanhSachVeController());
-	final index = Get.arguments;
+  final DashboardController dbcontroller = Get.put(DashboardController());
 
   bool isStarted = true;
 
@@ -53,9 +54,8 @@ class BarcodeScannerWithControllerState
                 //   facing: CameraFacing.front,
                 // ),
                 onDetect: (result) {
-									int id = int.parse(danhSachVeController.listOfDonTra[index].id);
                   controller.stop();
-									danhSachVeController.suDungVe(id: id, maChuyen: result.barcodes.first.rawValue);
+									dbcontroller.quetVe(result.barcodes.first.rawValue ?? "");
                 },
               ),
               (!isStarted

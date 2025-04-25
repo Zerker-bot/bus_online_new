@@ -1,4 +1,3 @@
-import 'package:bus_online/fetch/fetch_base.dart';
 import 'package:bus_online/pages/login.dart';
 import 'package:bus_online/storage/user_storage.dart';
 import 'package:http/http.dart' as http;
@@ -9,18 +8,21 @@ import 'dart:convert';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthService {
-  final supabase = Supabase.instance.client.auth;
-  final UserStorage _storage = UserStorage();
-  final FetchBase fetch = FetchBase();
+  final supabaseAuth = Supabase.instance.client.auth;
+  final supabase = Supabase.instance.client;
+  final UserStorage userStorage = UserStorage();
 
   Future<bool> loginWithSupabase(String email, String password) async {
     try {
-      final AuthResponse res = await supabase.signInWithPassword(
+      final AuthResponse res = await supabaseAuth.signInWithPassword(
         email: email,
         password: password,
       );
-      if (res.user != null) {
+      var user = res.user;
+      if (user != null) {
         Get.snackbar('Login success', "Đăng nhập thành công");
+        PostgrestList r = await supabase.from("profiles").select().eq("id", user.id);
+        userStorage.setUser(name: r[0]['name'] as String, role: r[0]['role'] as String);
         return true;
       } else {
         Get.snackbar('Login fail', "Không tìm thấy User");
@@ -36,7 +38,7 @@ class AuthService {
 
   Future<bool> signupWithSupabase(String name, String email, String password) async {
     try {
-      final AuthResponse res = await supabase.signUp(
+      final AuthResponse res = await supabaseAuth.signUp(
         email: email,
         password: password,
         data: {
@@ -58,91 +60,11 @@ class AuthService {
       return false;
     }
   }
-
-  Future loginWithEmail(String email, String password, String role) async {
-    try {
-      Map<String, String> body = {
-        "email": email,
-        "password": password,
-        "role": role,
-      };
-
-      http.Response response = await fetch.post(
-        endPoint: ApiEndPoints.authEndPoints.login,
-        body: body,
-      );
-
-      if (response.statusCode == 200) {
-        final json = jsonDecode(response.body);
-        if (json['status']) {
-          Get.snackbar('Xác thực', 'Đăng nhập thành công');
-          return json;
-        } else {
-          throw jsonDecode(response.body)['message'] ?? "Unknow Error Occured";
-        }
-      } else {
-        throw jsonDecode(response.body)['message'] ?? "Unknow Error Occured";
-      }
-    } catch (e) {
-      Get.snackbar('Xác thực', 'Đăng nhập thất bại');
-    }
-  }
-
-  Future registerWithEmail(String name, String email, String password) async {
-    try {
-      Map<String, String> body = {
-        "name": name,
-        "email": email,
-        "password": password,
-      };
-
-      http.Response response = await fetch.post(
-        endPoint: ApiEndPoints.authEndPoints.register,
-        body: body,
-      );
-
-      if (response.statusCode == 200) {
-        final json = jsonDecode(response.body);
-        if (json['status']) {
-          Get.snackbar('Xác thực', 'Đăng kí thành công');
-          return json;
-        } else {
-          throw jsonDecode(response.body)['message'] ?? "Unknow Error Occured";
-        }
-      } else {
-        throw jsonDecode(response.body)['message'] ?? "Unknow Error Occured";
-      }
-    } catch (e) {
-      Get.snackbar('Xác thực', 'Đăng kí thất bại');
-    }
-  }
-
   Future logoutWithSupabase() async {
     try {
-        await supabase.signOut();
+        await supabaseAuth.signOut();
+        userStorage.removeUser();
         Get.offAll(const LoginPage());
-    } catch (e) {
-      Get.snackbar('Lỗi', 'Hệ thống đang gặp lỗi');
-    }
-  }
-  Future logout() async {
-    try {
-      http.Response response = await fetch.post(
-        endPoint: ApiEndPoints.authEndPoints.logout,
-        auth: true,
-      );
-
-      if (response.statusCode == 200) {
-        final json = jsonDecode(response.body);
-        if (json['status']) {
-          _storage.removeUser();
-          Get.offAll(const LoginPage());
-        } else {
-          throw jsonDecode(response.body)['message'] ?? "Unknow Error Occured";
-        }
-      } else {
-        throw jsonDecode(response.body)['message'] ?? "Unknow Error Occured";
-      }
     } catch (e) {
       Get.snackbar('Lỗi', 'Hệ thống đang gặp lỗi');
     }
@@ -156,31 +78,23 @@ class AuthService {
   }
 
   bool isDriver() {
-    final String role = _storage.getRole();
+    final String role = getRole();
     return role == 'driver';
   }
 
   User? getUser()  {
-    return supabase.currentUser;
+    return supabaseAuth.currentUser;
   }
 
   String getUserId()  {
-    return supabase.currentUser?.id ?? "";
+    return supabaseAuth.currentUser?.id ?? "";
   }
 
   String getName() {
-    final user = getUser();
-    if ( user == null ) return "";
-    final metadata = user.userMetadata;
-    if ( metadata == null ) return "";
-    return metadata["name"];
+  return userStorage.getName();
   }
 
   String getRole() {
-    final user = getUser();
-    if ( user == null ) return "";
-    final metadata = user.userMetadata;
-    if ( metadata == null ) return "";
-    return metadata["role"];
+    return userStorage.getRole();
   }
 }
