@@ -1,5 +1,4 @@
 import 'package:bus_online/services/auth_service.dart';
-import 'package:bus_online/storage/user_storage.dart';
 import 'package:flutter/material.dart';
 
 class PersonalPage extends StatelessWidget {

@@ -36,10 +36,11 @@ dependencies:
   cupertino_icons: ^1.0.8
   get:
   get_storage:
-  http:
   mobile_scanner: ^6.0.7
   supabase_flutter: ^2.8.4
   qr_flutter: ^4.1.0
+  google_fonts: ^6.2.1
+  heroicons: ^0.11.0
 
 dev_dependencies:
   flutter_test:
