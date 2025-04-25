@@ -57,7 +57,7 @@ class ServiceItem extends StatelessWidget {
             style: TextStyle(
               color: primary ? Colors.white : Colors.black,
               fontWeight: primary ? FontWeight.w600 : FontWeight.w500,
-              fontSize: 8,
+              fontSize: 10,
             ),
           )
         ]),

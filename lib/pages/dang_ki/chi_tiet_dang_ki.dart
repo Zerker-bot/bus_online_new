@@ -5,6 +5,7 @@ import 'package:bus_online/utils/format_date.dart';
 import 'package:flutter/material.dart';
 import 'package:bus_online/controllers/danh_sach_ve_controller.dart';
 import 'package:get/get.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class ChiTietVe extends StatelessWidget {
   final DanhSachVeController controller = Get.put(DanhSachVeController());
@@ -280,38 +281,15 @@ class ChiTietVe extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                height: 160,
-                                child: Column(children: [
-                                  SizedBox(
-                                      height: 82,
-                                      child: Image.asset(
-                                        'assets/images/barcode.png',
-                                        fit: BoxFit.fitHeight,
-                                      )),
-                                  FullWidthButton(
-                                      onPressed: () {
-																		Get.toNamed('/scanner', arguments: index);
-																	},
-                                      backgroundColor: const Color(0xff18a5df),
-                                      child: const Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Icon(
-                                            Icons.qr_code_scanner,
-                                            color: Colors.white,
-                                          ),
-                                          SizedBox(width: 10),
-                                          Text(
-                                            'Quét mã',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                            ),
-                                          )
-                                        ],
-                                      )),
-                                ]),
+                                         SizedBox(height: 40),
+                                         Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  QrImageView(data: controller.listOfDonTra[index].id,
+                                    size: 170,
+                                    gapless: false,  )
+
+                                ],
                               )
                             ]),
                           )),

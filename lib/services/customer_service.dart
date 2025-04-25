@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:bus_online/fetch/fetch_base.dart';
 import 'package:bus_online/models/don_tra.dart';
 import 'package:bus_online/models/tram.dart';
 import 'package:bus_online/services/auth_service.dart';
@@ -13,7 +12,6 @@ class CustomerService {
   final supabase = Supabase.instance.client;
   final authService = AuthService();
   final tuyenService = TuyenService();
-  final FetchBase fetch = FetchBase();
 
   Future<List<DonTra>?> getDonTra() async {
     try {
@@ -111,25 +109,25 @@ class CustomerService {
   }
 
   Future<void> suDungVe({required int id, required String maChuyen}) async {
-    try {
-      Map<String, dynamic> body = {
-        "id": id,
-        "maChuyen": maChuyen,
-      };
-      http.Response res = await fetch.patch(
-          endPoint:
-              ApiEndPoints.customerEndPoints.bangDonTra,
-				  body: body,
-          auth: true);
-
-			final json = jsonDecode(res.body);
-      if (res.statusCode != 200) {
-        Get.snackbar("Lỗi",json['message']);
-				return;
-			}
-			Get.snackbar("Thành công",json['message']);
-    } catch (e) {
-      Get.snackbar('Lỗi', e.toString());
-    }
+    // try {
+    //   Map<String, dynamic> body = {
+    //     "id": id,
+    //     "maChuyen": maChuyen,
+    //   };
+    //   http.Response res = await fetch.patch(
+    //       endPoint:
+    //           ApiEndPoints.customerEndPoints.bangDonTra,
+		// 		  body: body,
+    //       auth: true);
+    //
+		// 	final json = jsonDecode(res.body);
+    //   if (res.statusCode != 200) {
+    //     Get.snackbar("Lỗi",json['message']);
+		// 		return;
+		// 	}
+		// 	Get.snackbar("Thành công",json['message']);
+    // } catch (e) {
+    //   Get.snackbar('Lỗi', e.toString());
+    // }
   }
 }
