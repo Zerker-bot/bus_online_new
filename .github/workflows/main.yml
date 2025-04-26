@@ -41,7 +41,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/app/outputs/flutter-apk/app-release.apk
-          asset_name: ${{ github.event.repository.name }}${{ steps.get_version.outputs.version }}
+          asset_name: ${{ github.event.repository.name }}${{ steps.get_version.outputs.version }}_android.apk
           tag: ${{ steps.get_version.outputs.version }}
       # - uses: tauri-apps/tauri-action@v0
       #   env:
