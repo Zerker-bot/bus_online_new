@@ -32,6 +32,17 @@ class DangKiVeController extends GetxController {
     _initTuyen();
   }
 
+  void swapTram() {
+    final temp = tramDiSelected.value;
+    tramDiSelected.value = tramDenSelected.value;
+    tramDiSelected.value = temp;
+    final tempTxt = tramDiTextController.value;
+    tramDiTextController.value = tramDenTextController.value;
+    tramDenTextController.value = tempTxt;
+    _setChieuDiCuaHanhKhach();
+    _setTienPhi();
+  }
+
   void setTuyen(Tuyen? tuyen) {
     tuyenSelected.value = tuyen;
     _initTramAndChuyenXe();
@@ -49,7 +60,7 @@ class DangKiVeController extends GetxController {
     _setTienPhi();
   }
 
-  void setChuyenXe(ChuyenXe chuyenXe) {
+  void setChuyenXe(ChuyenXe? chuyenXe) {
     chuyenXeSelected.value = chuyenXe;
   }
 
@@ -108,7 +119,7 @@ class DangKiVeController extends GetxController {
     }
   }
 
-  bool kiemTraTramHopLe(BuildContext context) {
+  bool kiemTraTramHopLe() {
    if(tramDiSelected.value?.maTram == tramDenSelected.value?.maTram) {
    //Alert Here
 			return false;
@@ -116,7 +127,7 @@ class DangKiVeController extends GetxController {
     return true;
   }
 
-  bool kiemTraTramDaChon(BuildContext context) {
+  bool kiemTraTramDaChon() {
    if(tramDiSelected.value == null || tramDenSelected.value == null) {
    //Alert Here
 			return false;
@@ -124,7 +135,7 @@ class DangKiVeController extends GetxController {
     return true;
   }
 
-  bool kiemTraSoLuongVeDaChon(BuildContext context) {
+  bool kiemTraSoLuongVeDaChon() {
    if(numberOfTicket.value == 0) {
    //Alert Here
 			return false;
@@ -132,7 +143,7 @@ class DangKiVeController extends GetxController {
     return true;
   }
 
-	bool kiemTraTuyenDaChon(BuildContext contex) {
+	bool kiemTraTuyenDaChon() {
    if(tuyenSelected.value == null) {
    //Alert Here
 			return false;
@@ -140,7 +151,7 @@ class DangKiVeController extends GetxController {
 		return true;
 	}
 
-	bool kiemTraChuyenXeDaChon(BuildContext contex) {
+	bool kiemTraChuyenXeDaChon() {
    if(chuyenXeSelected.value == null) {
    //Alert Here
 			return false;
@@ -159,9 +170,6 @@ class DangKiVeController extends GetxController {
 		tuyenTextController.clear();
 		tramDiTextController.clear();
 		tramDenTextController.clear();
-		listOfTram.value = [];
-		listOfTuyen.value = [];
-		listOfChuyenXe.value = [];
 	}
 
 	void submit() async {
