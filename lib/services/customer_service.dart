@@ -1,11 +1,8 @@
-import 'dart:convert';
 import 'package:bus_online/models/don_tra.dart';
 import 'package:bus_online/models/tram.dart';
 import 'package:bus_online/services/auth_service.dart';
 import 'package:bus_online/services/tuyen_service.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import 'package:bus_online/env_key.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class CustomerService {

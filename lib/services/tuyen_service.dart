@@ -1,10 +1,7 @@
-import 'dart:convert';
-import 'package:bus_online/env_key.dart';
 import 'package:bus_online/models/chuyen_xe.dart';
 import 'package:bus_online/models/tram.dart';
 import 'package:bus_online/models/tuyen.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class TuyenService {
