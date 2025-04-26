@@ -17,7 +17,7 @@ class PersonalPage extends StatelessWidget {
           right: 0,
           child: Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.33333,
+            height: MediaQuery.of(context).size.height * 0.25,
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
               borderRadius: const BorderRadius.only(
@@ -28,7 +28,7 @@ class PersonalPage extends StatelessWidget {
           ),
         ),
         Positioned.fill(
-          top: MediaQuery.of(context).size.height * 0.33333 - 80,
+          top: MediaQuery.of(context).size.height * 0.25 - 80,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -52,10 +52,10 @@ class PersonalPage extends StatelessWidget {
                 ),
               ),
               Text(
-                user.getRole(),
+                user.getRole() == "driver" ? "Tài xế" : "Khách hàng",
                 style: TextStyle(fontSize: 16, color: Colors.grey[700]!),
               ),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

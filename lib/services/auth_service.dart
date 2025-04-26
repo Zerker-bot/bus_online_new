@@ -1,9 +1,6 @@
 import 'package:bus_online/pages/login.dart';
 import 'package:bus_online/storage/user_storage.dart';
-import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-import 'package:bus_online/env_key.dart';
-import 'dart:convert';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 

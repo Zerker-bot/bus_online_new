@@ -7,6 +7,7 @@ class CustomButton extends StatelessWidget {
   final Radius? borderRadius;
   final Widget child;
   final BoxShadow? shadow;
+  final List<BoxShadow>? boxShadow;
   final EdgeInsets? padding;
 
   const CustomButton({
@@ -18,6 +19,7 @@ class CustomButton extends StatelessWidget {
     this.borderRadius,
     this.shadow,
     this.padding,
+    this.boxShadow
   });
 
   @override
