@@ -34,7 +34,7 @@ jobs:
       - name: Extract version from pubspec.yaml
         id: get_version 
         run: |
-          echo "::set-output name=version::$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2 | tr -d '\r')
+          echo "::set-output name=version::$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2 | tr -d '\r')"
 
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
