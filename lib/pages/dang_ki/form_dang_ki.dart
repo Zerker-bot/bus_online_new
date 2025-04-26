@@ -265,10 +265,10 @@ class BookingPage extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   child: FullWidthButton(
                     onPressed: () { 
-											if (!controller.kiemTraTuyenDaChon(context)) return;
-											if (!controller.kiemTraTramDaChon(context)) return;
-											if (!controller.kiemTraTramHopLe(context)) return;
-											if (!controller.kiemTraSoLuongVeDaChon(context)) return;
+											if (!controller.kiemTraTuyenDaChon()) return;
+											if (!controller.kiemTraTramDaChon()) return;
+											if (!controller.kiemTraTramHopLe()) return;
+											if (!controller.kiemTraSoLuongVeDaChon()) return;
 											Get.toNamed('/chon-chuyen-xe'); 
 										},
                     child: const Row(

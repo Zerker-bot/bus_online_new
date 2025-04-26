@@ -187,7 +187,7 @@ class ChonChuyenXe extends StatelessWidget {
                           vertical: 10, horizontal: 10),
                       child: FullWidthButton(
                         onPressed: () {
-											    if(!controller.kiemTraChuyenXeDaChon(context)) return;
+											    if(!controller.kiemTraChuyenXeDaChon()) return;
                           Get.toNamed('/xac-nhan');
                         },
                         child: const Row(

@@ -1,4 +1,3 @@
-import 'package:bus_online/components/full_width_button.dart';
 import 'package:bus_online/components/sks_ticket_view.dart';
 import 'package:bus_online/utils/format_currency.dart';
 import 'package:bus_online/utils/format_date.dart';
@@ -18,11 +17,7 @@ class ChiTietVe extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            Container(
-              decoration: const BoxDecoration(
-                color: Colors.black45,
-              ),
-            ),
+            Container(decoration: const BoxDecoration(color: Colors.black45)),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -30,20 +25,27 @@ class ChiTietVe extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 40),
+                      horizontal: 20,
+                      vertical: 40,
+                    ),
                     child: SKSTicketView(
                       backgroundPadding: const EdgeInsets.symmetric(
-                          vertical: 0, horizontal: 24),
+                        vertical: 0,
+                        horizontal: 24,
+                      ),
                       contentPadding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 10),
+                        vertical: 20,
+                        horizontal: 10,
+                      ),
                       drawTriangle: false,
                       triangleAxis: Axis.vertical,
                       drawArc: true,
                       child: SizedBox(
-                          width: 350,
-                          child: Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Column(children: [
+                        width: 350,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Column(
+                            children: [
                               SizedBox(
                                 height: 410,
                                 child: Column(
@@ -52,29 +54,33 @@ class ChiTietVe extends StatelessWidget {
                                     Align(
                                       alignment: Alignment.topRight,
                                       child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 2, horizontal: 5),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: const Color(0xff18a5df),
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(50)),
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 2,
+                                          horizontal: 5,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: const Color(0xff18a5df),
+                                            width: 1,
                                           ),
-                                          child: const Text(
-                                            'Vé Thường',
-                                            style: TextStyle(
-                                              color: Color(0xff18a5df),
-                                            ),
-                                          )),
+                                          borderRadius: const BorderRadius.all(
+                                            Radius.circular(50),
+                                          ),
+                                        ),
+                                        child: const Text(
+                                          'Vé Thường',
+                                          style: TextStyle(
+                                            color: Color(0xff18a5df),
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                     const Align(
                                       alignment: Alignment.topLeft,
                                       child: Padding(
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 10),
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 10,
+                                        ),
                                         child: Text(
                                           'Vé Xe Bus',
                                           style: TextStyle(
@@ -86,21 +92,22 @@ class ChiTietVe extends StatelessWidget {
                                     ),
                                     const Text(
                                       'Tên hành khách',
-                                      style: TextStyle(
-                                        color: Colors.black54,
-                                      ),
+                                      style: TextStyle(color: Colors.black54),
                                     ),
                                     Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 8),
-                                        child: Obx(() => Text(
-                                              controller.listOfDonTra[index]
-                                                  .tenHanhKhach,
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 20,
-                                              ),
-                                            ))),
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      child: Obx(
+                                        () => Text(
+                                          controller
+                                              .listOfDonTra[index]
+                                              .tenHanhKhach,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                     Row(
                                       children: [
                                         Expanded(
@@ -116,122 +123,145 @@ class ChiTietVe extends StatelessWidget {
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    bottom: 8),
-                                                child: Obx(() => Text(
-                                                      controller
-                                                          .listOfDonTra[index]
-                                                          .tenTramDi,
-                                                      style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 18,
-                                                      ),
-                                                    )),
+                                                  bottom: 8,
+                                                ),
+                                                child: Obx(
+                                                  () => Text(
+                                                    controller
+                                                        .listOfDonTra[index]
+                                                        .tenTramDi,
+                                                    style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 18,
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
-                                              const Text('Mã chuyến',
-                                                  style: TextStyle(
-                                                    color: Colors.black54,
-                                                  )),
-                                              Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 8),
-                                                  child: Obx(() => Text(
-                                                        controller
-                                                            .listOfDonTra[index]
-                                                            .maChuyen,
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontSize: 20,
-                                                        ),
-                                                      ))),
-                                              const Text('Số lượng',
-                                                  style: TextStyle(
-                                                    color: Colors.black54,
-                                                  )),
+                                              const Text(
+                                                'Mã chuyến',
+                                                style: TextStyle(
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    bottom: 8),
-                                                child: Obx(() => Text(
-                                                      controller
-                                                          .listOfDonTra[index]
-                                                          .soLuong,
-                                                      style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 20,
-                                                      ),
-                                                    )),
+                                                  bottom: 8,
+                                                ),
+                                                child: Obx(
+                                                  () => Text(
+                                                    controller
+                                                        .listOfDonTra[index]
+                                                        .maChuyen,
+                                                    style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 20,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const Text(
+                                                'Số lượng',
+                                                style: TextStyle(
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  bottom: 8,
+                                                ),
+                                                child: Obx(
+                                                  () => Text(
+                                                    controller
+                                                        .listOfDonTra[index]
+                                                        .soLuong,
+                                                    style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 20,
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
                                             ],
                                           ),
                                         ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
+                                        const SizedBox(width: 5),
                                         Expanded(
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              const Text('Trạm đến',
-                                                  style: TextStyle(
-                                                    color: Colors.black54,
-                                                  )),
+                                              const Text(
+                                                'Trạm đến',
+                                                style: TextStyle(
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    bottom: 8),
-                                                child: Obx(() => Text(
-                                                      controller
-                                                          .listOfDonTra[index]
-                                                          .tenTramDen,
-                                                      style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 18,
-                                                      ),
-                                                    )),
+                                                  bottom: 8,
+                                                ),
+                                                child: Obx(
+                                                  () => Text(
+                                                    controller
+                                                        .listOfDonTra[index]
+                                                        .tenTramDen,
+                                                    style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 18,
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
-                                              const Text('Giờ khởi hành',
-                                                  style: TextStyle(
-                                                    color: Colors.black54,
-                                                  )),
+                                              const Text(
+                                                'Giờ khởi hành',
+                                                style: TextStyle(
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
                                               Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 8),
-                                                  child: Obx(() => controller
-                                                              .listOfDonTra[
-                                                                  index]
-                                                              .chieu ==
-                                                          "di"
-                                                      ? Text(
-                                                          controller
-                                                              .listOfDonTra[
-                                                                  index]
-                                                              .chuyenXe
-                                                              ?.gioLuotDi ?? "",
-                                                          style:
-                                                              const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            fontSize: 20,
+                                                padding: const EdgeInsets.only(
+                                                  bottom: 8,
+                                                ),
+                                                child: Obx(
+                                                  () =>
+                                                      controller
+                                                                  .listOfDonTra[index]
+                                                                  .chieu ==
+                                                              "di"
+                                                          ? Text(
+                                                            controller
+                                                                    .listOfDonTra[index]
+                                                                    .chuyenXe
+                                                                    ?.gioLuotDi ??
+                                                                "",
+                                                            style:
+                                                                const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize: 20,
+                                                                ),
+                                                          )
+                                                          : Text(
+                                                            controller
+                                                                    .listOfDonTra[index]
+                                                                    .chuyenXe
+                                                                    ?.gioLuotVe ??
+                                                                "",
+                                                            style:
+                                                                const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize: 20,
+                                                                ),
                                                           ),
-                                                        )
-                                                      : Text(
-                                                          controller
-                                                              .listOfDonTra[
-                                                                  index]
-                                                              .chuyenXe
-                                                              ?.gioLuotVe ?? "",
-                                                          style:
-                                                              const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            fontSize: 20,
-                                                          ),
-                                                        ))),
+                                                ),
+                                              ),
                                               const Text(
                                                 'Ngày mua',
                                                 style: TextStyle(
@@ -239,60 +269,64 @@ class ChiTietVe extends StatelessWidget {
                                                 ),
                                               ),
                                               Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 8),
-                                                  child: Obx(() => Text(
-                                                        formatDate(
-                                                            "d/m/Y",
-                                                            controller
-                                                                .listOfDonTra[
-                                                                    index]
-                                                                .createdAt),
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontSize: 20,
-                                                        ),
-                                                      ))),
+                                                padding: const EdgeInsets.only(
+                                                  bottom: 8,
+                                                ),
+                                                child: Obx(
+                                                  () => Text(
+                                                    formatDate(
+                                                      "d/m/Y",
+                                                      controller
+                                                          .listOfDonTra[index]
+                                                          .createdAt,
+                                                    ),
+                                                    style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 20,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
                                       ],
                                     ),
-                                              const Text(
-                                                'Tiền phí',
-                                                style: TextStyle(
-                                                  color: Colors.black54,
-                                                ),
-                                              ),
-                                              Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 8),
-                                                  child: Obx(() => Text(
-                                                        '${formatCurrency(controller.listOfDonTra[index].tienPhi)}đ',
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontSize: 20,
-                                                        ),
-                                                      ))),
+                                    const Text(
+                                      'Tiền phí',
+                                      style: TextStyle(color: Colors.black54),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      child: Obx(
+                                        () => Text(
+                                          '${formatCurrency(controller.listOfDonTra[index].tienPhi)}đ',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
-                                         SizedBox(height: 40),
-                                         Column(
+                              SizedBox(height: 40),
+                              Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  QrImageView(data: controller.listOfDonTra[index].id,
-                                    size: 170,
-                                    gapless: false,  )
-
+                                  QrImageView(
+                                    data: controller.listOfDonTra[index].id,
+                                    size: MediaQuery.of(context).size.width * 0.35,
+                                    gapless: false,
+                                  ),
                                 ],
-                              )
-                            ]),
-                          )),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),

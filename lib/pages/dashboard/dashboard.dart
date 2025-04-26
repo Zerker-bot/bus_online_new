@@ -1,18 +1,13 @@
 import 'package:bus_online/controllers/dashboard_controller.dart';
-import 'package:bus_online/pages/dashboard/lich_trinh.dart';
-import 'package:bus_online/pages/dashboard/quan_li_ve.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import '../../components/full_width_button.dart';
 
 class Dashboard extends StatelessWidget {
 
-  DashboardController controller = Get.put(DashboardController());
+  final DashboardController controller = Get.put(DashboardController());
 
   Dashboard({super.key});
-
 
   @override
   Widget build(BuildContext context) {
