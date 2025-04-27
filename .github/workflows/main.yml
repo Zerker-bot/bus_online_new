@@ -21,9 +21,12 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.19.0
+          flutter-version: 3.29.3
       - name: Check Flutter
         run: flutter --version
+      - run: echo $SECRETS_FILE_CONTENT | base64 -d > lib/env_key.dart
+        env:
+          SECRETS_FILE_CONTENT: ${{ secrets.SECRETS_FILE_CONTENT }}
       - name: Install Dependencies
         run: flutter pub get 
       - name: Build APK
@@ -31,14 +34,14 @@ jobs:
       - name: Extract version from pubspec.yaml
         id: get_version 
         run: |
-          echo "::set-output name=version::$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2 | tr -d '\r')
+          echo "::set-output name=version::$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2 | tr -d '\r')"
 
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/app/outputs/flutter-apk/app-release.apk
-          asset_name: ${{ github.event.repository.name }}${{ steps.get_version.outputs.version }}
+          asset_name: ${{ github.event.repository.name }}${{ steps.get_version.outputs.version }}_android.apk
           tag: ${{ steps.get_version.outputs.version }}
       # - uses: tauri-apps/tauri-action@v0
       #   env:
