@@ -22,7 +22,9 @@ class CustomerService {
         tram_di:ma_tram_di (*),
         tram_den:ma_tram_dich (*),
         chuyen_xe(*)
-        ''').eq("ma_khach_hang", user);
+        ''')
+      .isFilter("trang_thai_thanh_toan", null)
+      .eq("ma_khach_hang", user);
 
       final List<DonTra> listOfDonTra = res.map((e) => DonTra.fromJson(e)).toList();
       return listOfDonTra;
