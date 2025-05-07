@@ -68,52 +68,58 @@ class CustomerPanel extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Tuyến',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Tuyến',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 8),
-                        Container(
-                          width: 200,
-                          height: 20,
-                          decoration: BoxDecoration(color: Colors.white),
-                          child: Obx(
-                            () => DropdownMenu(
-                              width: 200,
-                              menuStyle: MenuStyle(
-                                backgroundColor: WidgetStatePropertyAll(
-                                  Colors.white,
+                          SizedBox(height: 8),
+                          Container(
+                            height: 20,
+                            decoration: BoxDecoration(color: Colors.white),
+                            child: Obx(
+                              () => DropdownMenu(
+                                width: double.infinity,
+                                menuStyle: MenuStyle(
+                                  backgroundColor: WidgetStatePropertyAll(
+                                    Colors.white,
+                                  ),
                                 ),
-                              ),
-                              controller: controller.tuyenTextController,
-                              dropdownMenuEntries:
-                                  controller.listOfTuyen.map((element) {
-                                    return DropdownMenuEntry(
-                                      value: element,
-                                      label: element.tenTuyen,
-                                    );
-                                  }).toList(),
-                              onSelected: controller.setTuyen,
-                              hintText: "Chọn tuyến đường",
-                              textStyle: TextStyle(fontWeight: FontWeight.w800),
-                              trailingIcon: SizedBox.shrink(),
-                              inputDecorationTheme: const InputDecorationTheme(
-                                constraints: BoxConstraints(maxHeight: 20),
-                                isDense: true,
-                                border: InputBorder.none,
+                                controller: controller.tuyenTextController,
+                                dropdownMenuEntries:
+                                    controller.listOfTuyen.map((element) {
+                                      return DropdownMenuEntry(
+                                        value: element,
+                                        label: element.tenTuyen,
+                                      );
+                                    }).toList(),
+                                onSelected: controller.setTuyen,
+                                hintText: "Chọn tuyến đường",
+                                textStyle: TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                menuHeight: 150,
+                                trailingIcon: SizedBox.shrink(),
+                                inputDecorationTheme: const InputDecorationTheme(
+                                  constraints: BoxConstraints(maxHeight: 20),
+                                  isDense: true,
+                                  isCollapsed: true,
+                                  border: InputBorder.none,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -156,52 +162,59 @@ class CustomerPanel extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Trạm đi',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Trạm đi',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 8),
-                        Container(
-                          width: 200,
-                          height: 20,
-                          decoration: BoxDecoration(color: Colors.white),
-                          child: Obx(
-                            () => DropdownMenu(
-                              width: 200,
-                              menuStyle: MenuStyle(
-                                backgroundColor: WidgetStatePropertyAll(
-                                  Colors.white,
+                          SizedBox(height: 8),
+                          Container(
+                            height: 20,
+                            decoration: BoxDecoration(color: Colors.white),
+                            child: Obx(
+                              () => DropdownMenu(
+                                width: double.infinity,
+                                menuStyle: MenuStyle(
+                                  backgroundColor: WidgetStatePropertyAll(
+                                    Colors.white,
+                                  ),
                                 ),
-                              ),
-                              controller: controller.tramDiTextController,
-                              dropdownMenuEntries:
-                                  controller.listOfTram.map((element) {
-                                    return DropdownMenuEntry(
-                                      value: element,
-                                      label: element.tenTram,
-                                    );
-                                  }).toList(),
-                              onSelected: controller.setTramDi,
-                              hintText: "Chọn trạm đi",
-                              textStyle: TextStyle(fontWeight: FontWeight.w800),
-                              trailingIcon: SizedBox.shrink(),
-                              inputDecorationTheme: const InputDecorationTheme(
-                                constraints: BoxConstraints(maxHeight: 20),
-                                isDense: true,
-                                border: InputBorder.none,
+                                controller: controller.tramDiTextController,
+                                dropdownMenuEntries:
+                                    controller.listOfTram.map((element) {
+                                      return DropdownMenuEntry(
+                                        value: element,
+                                        label: element.tenTram,
+                                      );
+                                    }).toList(),
+                                onSelected: controller.setTramDi,
+                                hintText: "Chọn trạm đi",
+                                textStyle: TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                menuHeight: 150,
+                                trailingIcon: SizedBox.shrink(),
+                                inputDecorationTheme: const InputDecorationTheme(
+                                  alignLabelWithHint: false,
+                                  constraints: BoxConstraints(maxHeight: 20),
+                                  isDense: true,
+                                  isCollapsed: true,
+                                  border: InputBorder.none,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -244,52 +257,58 @@ class CustomerPanel extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Trạm đến',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Trạm đến',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 8),
-                        Container(
-                          width: 200,
-                          height: 20,
-                          decoration: BoxDecoration(color: Colors.white),
-                          child: Obx(
-                            () => DropdownMenu(
-                              width: 200,
-                              menuStyle: MenuStyle(
-                                backgroundColor: WidgetStatePropertyAll(
-                                  Colors.white,
+                          SizedBox(height: 8),
+                          Container(
+                            height: 20,
+                            decoration: BoxDecoration(color: Colors.white),
+                            child: Obx(
+                              () => DropdownMenu(
+                                width: double.infinity,
+                                menuStyle: MenuStyle(
+                                  backgroundColor: WidgetStatePropertyAll(
+                                    Colors.white,
+                                  ),
                                 ),
-                              ),
-                              controller: controller.tramDenTextController,
-                              dropdownMenuEntries:
-                                  controller.listOfTram.map((element) {
-                                    return DropdownMenuEntry(
-                                      value: element,
-                                      label: element.tenTram,
-                                    );
-                                  }).toList(),
-                              onSelected: controller.setTramDen,
-                              hintText: "Chọn trạm đến",
-                              textStyle: TextStyle(fontWeight: FontWeight.w800),
-                              trailingIcon: SizedBox.shrink(),
-                              inputDecorationTheme: const InputDecorationTheme(
-                                constraints: BoxConstraints(maxHeight: 20),
-                                isDense: true,
-                                border: InputBorder.none,
+                                controller: controller.tramDenTextController,
+                                dropdownMenuEntries:
+                                    controller.listOfTram.map((element) {
+                                      return DropdownMenuEntry(
+                                        value: element,
+                                        label: element.tenTram,
+                                      );
+                                    }).toList(),
+                                onSelected: controller.setTramDen,
+                                hintText: "Chọn trạm đến",
+                                textStyle: TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  overflow: TextOverflow.ellipsis
+                                ),
+                                menuHeight: 150,
+                                trailingIcon: SizedBox.shrink(),
+                                inputDecorationTheme: const InputDecorationTheme(
+                                  constraints: BoxConstraints(maxHeight: 20),
+                                  isDense: true,
+                                  isCollapsed: true,
+                                  border: InputBorder.none,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
