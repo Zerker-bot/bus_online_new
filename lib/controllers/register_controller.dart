@@ -25,7 +25,7 @@ class RegisterController extends GetxController {
 		  passwordController.clear();
 			nameController.clear();
 			repeatPasswordController.clear();
-      Get.offNamed('/home');
+      Get.offNamed('/login');
     }
   }
 
