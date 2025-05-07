@@ -14,21 +14,21 @@ class QuanLiVeController extends GetxController {
   void onInit() {
     super.onInit();
     initialListOfVe();
-        Supabase.instance.client.channel('bang_don_tra')
-        .onPostgresChanges(
-            event: PostgresChangeEvent.update,
-            schema: 'public',
-            table: 'bang_don_tra',
-            filter: PostgresChangeFilter(
-                type: PostgresChangeFilterType.eq,
-                column: 'ma_chuyen',
-                value: storage.getMaChuyen()),
-            callback: (payload) {
-              if (!isHoanThanh(payload.newRecord)) {
-                addListOfVe(payload.newRecord);
-              }
-            })
-        .subscribe();
+        // Supabase.instance.client.channel('bang_don_tra')
+        // .onPostgresChanges(
+        //     event: PostgresChangeEvent.update,
+        //     schema: 'public',
+        //     table: 'bang_don_tra',
+        //     filter: PostgresChangeFilter(
+        //         type: PostgresChangeFilterType.eq,
+        //         column: 'ma_chuyen',
+        //         value: storage.getMaChuyen()),
+        //     callback: (payload) {
+        //       if (!isHoanThanh(payload.newRecord)) {
+        //         addListOfVe(payload.newRecord);
+        //       }
+        //     })
+        // .subscribe();
   }
 
   Future<void> initialListOfVe() async {

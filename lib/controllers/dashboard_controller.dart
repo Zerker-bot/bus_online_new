@@ -1,7 +1,4 @@
 import 'package:bus_online/models/bang_don_tra.dart';
-import 'package:bus_online/models/chuyen_xe.dart';
-import 'package:bus_online/models/tram.dart';
-import 'package:bus_online/services/tuyen_service.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -36,11 +33,9 @@ class DashboardController extends GetxController {
   Chuyến: ${donTra.maChuyen} 
   Trạm đi:${donTra.tenTramDi}
   Trạm đến: ${donTra.tenTramDen}""");
-    }
-    catch (e) {
+    } catch (e) {
       Get.snackbar("Lỗi", "Đã xảy ra lỗi: ${e.toString()}");
     }
     Get.offNamed("/dashboard");
-
-}
+  }
 }

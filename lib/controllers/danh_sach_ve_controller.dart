@@ -1,5 +1,6 @@
 import 'package:bus_online/models/don_tra.dart';
 import 'package:bus_online/services/customer_service.dart';
+import 'package:bus_online/storage/user_storage.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -8,6 +9,7 @@ class DanhSachVeController extends GetxController {
   final CustomerService customer = CustomerService();
   final listOfDonTra = <DonTra>[].obs;
   final isLoading = true.obs;
+  final user = UserStorage();
 
   @override
   void onInit() {
@@ -20,8 +22,10 @@ class DanhSachVeController extends GetxController {
           schema: "public",
           table: "bang_don_tra",
           callback: (payload) async {
+           if(user.getRole() == "customer") {
             await Get.offAllNamed('danh-sach-dang-ki');
             await reload();
+           }
           },
         )
         .subscribe();
