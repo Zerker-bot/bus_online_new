@@ -100,8 +100,10 @@ class DanhSachDangKi extends StatelessWidget {
                                                       controller
                                                           .listOfDonTra[index]
                                                           .tenTramDi,
+                                                      textAlign:
+                                                          TextAlign.center,
                                                       style: const TextStyle(
-                                                        fontSize: 16,
+                                                        fontSize: 14,
                                                         color: Color(
                                                           0xffff5723,
                                                         ),
@@ -116,8 +118,10 @@ class DanhSachDangKi extends StatelessWidget {
                                                       controller
                                                           .listOfDonTra[index]
                                                           .tenTramDen,
+                                                      textAlign:
+                                                          TextAlign.center,
                                                       style: const TextStyle(
-                                                        fontSize: 16,
+                                                        fontSize: 14,
                                                         color: Color(
                                                           0xffff5723,
                                                         ),
